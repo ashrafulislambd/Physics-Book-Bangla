@@ -5,7 +5,7 @@
 Here is a basic hello world program in python
 
 ```
-print("Hello World 3")
+print("Hello World")
 ```
 
 $$e^x$$
