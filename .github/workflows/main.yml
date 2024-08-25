@@ -20,11 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install markdown watchdog
+        pip install markdown python-markdown-math watchdog
 
     - name: Run script
       run: |
-        python filename.py  # Adjust to your script name
+        python main.py  # Adjust to your script name
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
