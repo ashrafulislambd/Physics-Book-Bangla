@@ -1,7 +1,13 @@
-import markdown, os, sys, time, webbrowser, shutil
+import markdown, os, sys, time, webbrowser, shutil, argparse
 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Run script in different modes.')
+    parser.add_argument('--mode', choices=['build', 'watch'], default='watch',
+                        help='Specify the mode to run the script in (default: build)')
+    return parser.parse_args()
 
 def read(file):
     with open(file) as f:
@@ -79,7 +85,9 @@ class RerunHandler(FileSystemEventHandler):
 
 print("Started. Reload browser to see changes")
 
-if __name__ == "__main__":
+args = parse_args()
+
+if args.mode == "watch":
     script_name = sys.argv[0]
 
     event_handler = RerunHandler(script_name)
@@ -97,6 +105,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-else:
+elif args.mode == "build":
     clear_output_directory()
     render("", "Open Source Book")
