@@ -48,7 +48,11 @@ def render(dirname, title):
     with open(os.path.join(base_dir, "index.md")) as file:
         md_content = file.read()
 
-    html = markdown.markdown(md_content, extensions=['mdx_math'])
+    html = markdown.markdown(md_content, extensions=['mdx_math'], extension_configs={
+        'mdx_math': {
+            "enable_dollar_delimiter": True,
+        }
+    })
 
     final = header_template + html + footer_template
 
